@@ -2,7 +2,7 @@
   "name": "convert-to-vertical-video",
   "version": "1.0.0",
   "description": "Convert a 16:9 video to 9:16 video with node and ffmpeg",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "types": "dist/types.d.ts",
   "type": "module",
   "scripts": {
@@ -13,6 +13,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
   "author": "",
   "keywords": [
     "typescript",
