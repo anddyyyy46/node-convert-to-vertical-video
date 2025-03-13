@@ -1,4 +1,5 @@
 import type { Metadata } from "./types.ts";
+export type { Metadata };
 export declare const convertVideo: (videoPath: string, outputPath: string, options?: {
     finalWidth: number;
     finalHeight: number;

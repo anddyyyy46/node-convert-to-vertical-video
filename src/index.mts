@@ -7,6 +7,7 @@ import type { Metadata } from "./types.ts";
 ffmpeg.setFfmpegPath(ffmpegPath);
 ffmpeg.setFfprobePath(ffprobePath);
 
+export type { Metadata }
 export const convertVideo = async (
   videoPath: string,
   outputPath: string,
