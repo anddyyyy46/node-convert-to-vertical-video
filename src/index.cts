@@ -7,7 +7,8 @@ import type { Metadata } from "./types" with { "resolution-mode": "require" };
 ffmpeg.setFfmpegPath(ffmpegPath);
 ffmpeg.setFfprobePath(ffprobePath);
 
-const convertVideo = async (
+export type { Metadata }
+export const convertVideo = async (
     videoPath: string,
     outputPath: string,
     options = { finalWidth: 1080, finalHeight: 1920 }
@@ -86,7 +87,7 @@ const convertVideo = async (
     });
 };
 
-const getMetadata = async (videoPath: string): Promise<Error | Metadata> => {
+export const getMetadata = async (videoPath: string): Promise<Error | Metadata> => {
     return new Promise((resolve, reject): Error | Metadata => {
         ffmpeg.ffprobe(videoPath, (err: string, metadata) => {
             if (err) {
@@ -105,5 +106,3 @@ const getMetadata = async (videoPath: string): Promise<Error | Metadata> => {
         return new Error("Couldn't get metadata");
     });
 };
-
-module.exports = { convertVideo, getMetadata }

@@ -36,6 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMetadata = exports.convertVideo = void 0;
 const fluent_ffmpeg_1 = __importDefault(require("fluent-ffmpeg"));
 const ffmpeg_1 = require("@ffmpeg-installer/ffmpeg");
 const ffprobe_1 = require("@ffprobe-installer/ffprobe");
@@ -44,7 +45,7 @@ fluent_ffmpeg_1.default.setFfmpegPath(ffmpeg_1.path);
 fluent_ffmpeg_1.default.setFfprobePath(ffprobe_1.path);
 const convertVideo = async (videoPath, outputPath, options = { finalWidth: 1080, finalHeight: 1920 }) => {
     return new Promise(async (resolve, reject) => {
-        const videoMetadata = (await getMetadata(videoPath));
+        const videoMetadata = (await (0, exports.getMetadata)(videoPath));
         const scaledWidth = (videoMetadata.width * 16) / 9;
         const scaledHeight = (videoMetadata.height * 16) / 9;
         const finalOutputVar = "v";
@@ -111,6 +112,7 @@ const convertVideo = async (videoPath, outputPath, options = { finalWidth: 1080,
             .run();
     });
 };
+exports.convertVideo = convertVideo;
 const getMetadata = async (videoPath) => {
     return new Promise((resolve, reject) => {
         fluent_ffmpeg_1.default.ffprobe(videoPath, (err, metadata) => {
@@ -131,4 +133,4 @@ const getMetadata = async (videoPath) => {
         return new Error("Couldn't get metadata");
     });
 };
-module.exports = { convertVideo, getMetadata };
+exports.getMetadata = getMetadata;
